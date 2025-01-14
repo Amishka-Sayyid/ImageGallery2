@@ -44,12 +44,15 @@ function createThumbnails(imagesArray) {
     newImage.addEventListener("click", function () {
       console.log("Thumbnail clicked", imageData);
       createLargeImagesHandler(imageData);
-      largeContainer.classList.add("show");
+      setTimeout(() => {
+        largeContainer.classList.add("show"); // Add the .show class after the image is added
+      }, 0);
     });
 
     thumbnail.appendChild(newImage);
   });
 }
+createThumbnails(images);
 
 // Function to handle the large image display
 function createLargeImagesHandler(imageData) {
@@ -63,11 +66,9 @@ function createLargeImagesHandler(imageData) {
   largeContainer.appendChild(largeImage);
 }
 
-createThumbnails(images);
-
 // Close the large container when clicking outside the image
-largeContainer.addEventListener("click", function (event) {
-  if (event.target === largeContainer) {
-    largeContainer.classList.remove("show"); // Hide large container when clicking outside the image
+window.addEventListener("click", function (event) {
+  if (!largeContainer.contains(event.target)) {
+    largeContainer.classList.remove("show"); // Hide large container when clicking outside
   }
 });

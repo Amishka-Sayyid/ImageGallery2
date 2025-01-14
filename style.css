@@ -12,12 +12,20 @@
   justify-content: space-around;
   align-content: center;
   flex-wrap: wrap;
-  height: 100vh;
+  height: 85vh;
   width: auto;
   gap: 2rem;
   position: absolute;
   top: 0;
   border: 1px solid grey;
+  border-radius: 2rem;
+  margin: 2rem;
+}
+
+#thumbnail-container:hover,
+#thumbnail-container:focus,
+#thumbnail-container:focus-visible {
+  box-shadow: 0 0 10px 2px rgba(100, 108, 255, 0.7);
 }
 .ImageStyle {
   height: 30%;
