@@ -1,0 +1,54 @@
+@import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#thumbnail-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: auto;
+  gap: 2rem;
+  position: absolute;
+  top: 0;
+  border: 1px solid grey;
+}
+.ImageStyle {
+  height: 30%;
+  filter: grayscale();
+  transition: 1s;
+}
+.ImageStyle:hover {
+  filter: grayscale(0);
+  transform: scale(1.2);
+}
+
+/* Initial hidden state for large image container */
+#large-image-container {
+  position: fixed;
+  display: none; /* Initially hidden */
+  height: 60vh;
+  width: 80vh;
+  margin: auto;
+
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
+  z-index: 100; /* Ensure it's above other content */
+}
+.largeImageStyle {
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+
+/* When .show class is added, make the container visible */
+.show {
+  display: block; /* Show large container */
+}
