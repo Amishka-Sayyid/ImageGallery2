@@ -35,7 +35,7 @@ const largeContainer = document.getElementById("large-image-container");
 
 function createThumbnails(imagesArray) {
   //b4 i was passing the whole image data i needed to make sure the  createLargeImagesHandler recived the single image data being clicked. hence the imageData parameter.
-  imagesArray.forEach((imageData) => {
+  imagesArray.forEach((imageData, index) => {
     const newImage = document.createElement("img");
     newImage.src = imageData.src;
     newImage.alt = imageData.alt;
@@ -43,7 +43,7 @@ function createThumbnails(imagesArray) {
 
     newImage.addEventListener("click", function () {
       console.log("Thumbnail clicked", imageData);
-      createLargeImagesHandler(imageData);
+      createLargeImagesHandler(imageData, index);
       setTimeout(() => {
         largeContainer.classList.add("show"); // Add the .show class after the image is added
       }, 0);
@@ -55,15 +55,41 @@ function createThumbnails(imagesArray) {
 createThumbnails(images);
 
 // Function to handle the large image display
-function createLargeImagesHandler(imageData) {
+function createLargeImagesHandler(imageData, currentIndex) {
   console.log(imageData);
 
   largeContainer.innerHTML = "";
+  //creting large image
   const largeImage = document.createElement("img");
   largeImage.src = imageData.src; //use the clicked images's src
   largeImage.alt = imageData.alt;
   largeImage.className = "largeImageStyle";
+
+  // Create Previous Button
+  const prevButton = document.createElement("button");
+  prevButton.innerText = "Previous";
+  prevButton.className = "prev-button";
+
+  prevButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    createLargeImagesHandler(images[prevIndex], prevIndex);
+  });
+
+  // Create Next Button
+  const nextButton = document.createElement("button");
+  nextButton.innerText = "Next";
+  nextButton.className = "next-button";
+
+  nextButton.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const nextIndex = (currentIndex + 1) % images.length;
+    createLargeImagesHandler(images[nextIndex], nextIndex);
+  });
+
+  largeContainer.appendChild(prevButton);
   largeContainer.appendChild(largeImage);
+  largeContainer.appendChild(nextButton);
 }
 
 // Close the large container when clicking outside the image
