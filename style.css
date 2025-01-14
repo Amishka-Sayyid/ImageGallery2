@@ -40,7 +40,7 @@
 /* Initial hidden state for large image container */
 #large-image-container {
   position: fixed;
-  display: none; /* Initially hidden */
+  visibility: hidden; /* Initially hidden */
   height: 60vh;
   width: 80vh;
   margin: auto;
@@ -58,5 +58,5 @@
 
 /* When .show class is added, make the container visible */
 .show {
-  display: block; /* Show large container */
+  visibility: visible; /* Show large container */
 }
